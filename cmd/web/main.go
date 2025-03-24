@@ -1,13 +1,12 @@
 package main
 
 import (
-	"database/sql"
 	"flag"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
-	"patterns/models"
+	"patterns/configuration"
 	"time"
 )
 
@@ -16,8 +15,7 @@ const port = ":4000"
 type application struct {
 	templateMap map[string]*template.Template
 	config      appConfig
-	DB          *sql.DB
-	Models      models.Models
+	App         *configuration.Application
 }
 
 type appConfig struct {
@@ -40,7 +38,7 @@ func main() {
 		log.Panic(err)
 	}
 
-	app.DB = db
+	app.App = configuration.New(db)
 
 	// http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 	// 	fmt.Fprint(w, "Hello World!")
@@ -56,6 +54,6 @@ func main() {
 	// err := http.ListenAndServe(port, nil)
 	err = srv.ListenAndServe()
 	if err != nil {
-		log.Panic(err)
+		log.Fatal(err)
 	}
 }
