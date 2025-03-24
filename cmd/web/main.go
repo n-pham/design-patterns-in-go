@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"patterns/models"
 	"time"
 )
 
@@ -16,6 +17,7 @@ type application struct {
 	templateMap map[string]*template.Template
 	config      appConfig
 	DB          *sql.DB
+	Models      models.Models
 }
 
 type appConfig struct {
@@ -29,7 +31,7 @@ func main() {
 	}
 
 	flag.BoolVar(&app.config.useCache, "cache", false, "Use template cache")
-	flag.StringVar(&app.config.dsn, "dsn", "patterns.db", "DSN")
+	flag.StringVar(&app.config.dsn, "dsn", "/Users/pham/Documents/learn/code/design-patterns-in-go/patterns.db", "DSN")
 	flag.Parse()
 
 	// get database
