@@ -7,18 +7,11 @@ toolchain go1.24.1
 require (
 	github.com/go-chi/chi/v5 v5.2.1
 	github.com/marcboeker/go-duckdb v1.8.5
-	github.com/marcboeker/go-duckdb/mapping v0.0.4
 	github.com/tsawler/toolbox v1.3.1
 )
 
 require (
 	github.com/apache/arrow-go/v18 v18.2.0 // indirect
-	github.com/duckdb/duckdb-go-bindings v0.1.11 // indirect
-	github.com/duckdb/duckdb-go-bindings/darwin-amd64 v0.1.6 // indirect
-	github.com/duckdb/duckdb-go-bindings/darwin-arm64 v0.1.6 // indirect
-	github.com/duckdb/duckdb-go-bindings/linux-amd64 v0.1.6 // indirect
-	github.com/duckdb/duckdb-go-bindings/linux-arm64 v0.1.6 // indirect
-	github.com/duckdb/duckdb-go-bindings/windows-amd64 v0.1.6 // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/google/flatbuffers v25.2.10+incompatible // indirect
