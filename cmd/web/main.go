@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"flag"
 	"fmt"
 	"html/template"
@@ -14,10 +15,12 @@ const port = ":4000"
 type application struct {
 	templateMap map[string]*template.Template
 	config      appConfig
+	DB          *sql.DB
 }
 
 type appConfig struct {
 	useCache bool
+	dsn      string
 }
 
 func main() {
@@ -26,7 +29,16 @@ func main() {
 	}
 
 	flag.BoolVar(&app.config.useCache, "cache", false, "Use template cache")
+	flag.StringVar(&app.config.dsn, "dsn", "patterns.db", "DSN")
 	flag.Parse()
+
+	// get database
+	db, err := initDB(app.config.dsn)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	app.DB = db
 
 	// http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 	// 	fmt.Fprint(w, "Hello World!")
@@ -40,7 +52,7 @@ func main() {
 	fmt.Println("Web application starting on port", port)
 
 	// err := http.ListenAndServe(port, nil)
-	err := srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	if err != nil {
 		log.Panic(err)
 	}
